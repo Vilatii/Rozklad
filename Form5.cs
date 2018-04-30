@@ -78,5 +78,51 @@ namespace Rozklad
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            conn.Open();
+            MySqlCommand comm = conn.CreateCommand();
+            comm.CommandText = "INSERT INTO Auditorii(Kod,Zaviduyuciy,Nazva,Tip) VALUES(@Kod, @Zaviduyuciy, @Nazva, @Tip)";
+            comm.Parameters.Add("@Kod", textBox1.Text);
+            comm.Parameters.Add("@Zaviduyuciy", textBox2.Text);
+            comm.Parameters.Add("@Nazva", textBox3.Text);
+            comm.Parameters.Add("@Tip", textBox4.Text);
+            comm.ExecuteNonQuery();
+            mySqlDataAdapter = new MySqlDataAdapter("select * from Auditorii", conn);
+            DataSet DS = new DataSet();
+            mySqlDataAdapter.Fill(DS);
+            dataGridView1.DataSource = DS.Tables[0];
+            conn.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            conn.Open();
+            MySqlCommand comm = conn.CreateCommand();
+            comm.CommandText = "DELETE FROM Auditorii WHERE Kod = " + textBox1.Text;
+            comm.ExecuteNonQuery();
+            mySqlDataAdapter = new MySqlDataAdapter("select * from Auditorii", conn);
+            DataSet DS = new DataSet();
+            mySqlDataAdapter.Fill(DS);
+            dataGridView1.DataSource = DS.Tables[0];
+            conn.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            conn.Open();
+            MySqlCommand comm = conn.CreateCommand();
+            comm.CommandText = "UPDATE Auditorii SET Nazva = '" + textBox3.Text + "', Zaviduyuciy = '" + textBox2.Text + "', Tip = '" + textBox4.Text + "'  WHERE Auditorii.Kod = '" + textBox1.Text + "'";
+            comm.ExecuteNonQuery();
+            mySqlDataAdapter = new MySqlDataAdapter("select * from Auditorii", conn);
+            DataSet DS = new DataSet();
+            mySqlDataAdapter.Fill(DS);
+            dataGridView1.DataSource = DS.Tables[0];
+            conn.Close();
+        }
     }
 }

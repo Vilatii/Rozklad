@@ -44,7 +44,7 @@ namespace Rozklad
                 ";user=" + userName +
                 ";database=" + dbName +
                 ";port=" + port +
-                ";password=" + password + ";";
+                ";password=" + password + ";charset=utf8;";
             MySqlConnection conn = new MySqlConnection(SQL.connStr);
             bool CloseConnection()
             {
