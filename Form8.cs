@@ -99,9 +99,13 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
 
         private void button1_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             try
             {
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
+=======
+            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+>>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "INSERT INTO NavantazhenyaVikladachiv(Kod,Nomer,Vikladachi) VALUES(@Kod, @Nomer, @Vikladachi)";
@@ -114,18 +118,25 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+<<<<<<< HEAD
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+=======
+>>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             try
             {
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
+=======
+            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+>>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM NavantazhenyaVikladachiv WHERE Kod = " + textBox1.Text;
@@ -135,18 +146,25 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+<<<<<<< HEAD
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+=======
+>>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             try
             {
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
+=======
+            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+>>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE NavantazhenyaVikladachiv SET Nomer = '" + comboBox1.SelectedValue + "', Vikladachi = '" + comboBox2.SelectedValue + "' WHERE NavantazhenyaVikladachiv.Kod = '" + textBox1.Text + "'";
@@ -156,11 +174,14 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+<<<<<<< HEAD
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+=======
+>>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
         }
     }
 }
