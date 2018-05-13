@@ -47,3 +47,22 @@ c:\Users\Vitalii\source\repos\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.csproj.Gene
 c:\Users\Vitalii\source\repos\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.csproj.CoreCompileInputs.cache
 c:\Users\Vitalii\source\repos\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.exe
 c:\Users\Vitalii\source\repos\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.pdb
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\bin\Debug\Rozklad.exe.config
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\bin\Debug\Rozklad.exe
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\bin\Debug\Rozklad.pdb
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\bin\Debug\MySql.Data.xml
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.csprojResolveAssemblyReference.cache
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form1.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form2.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form3.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form4.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form5.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form6.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form7.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Form8.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.Properties.Resources.resources
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.csproj.GenerateResource.cache
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.csproj.CoreCompileInputs.cache
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.csproj.CopyComplete
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.exe
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.pdb

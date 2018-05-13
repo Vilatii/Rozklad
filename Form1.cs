@@ -206,41 +206,57 @@ namespace Rozklad
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
-            conn.Open();
-            MySqlCommand comm = conn.CreateCommand();
-            comm.CommandText = "INSERT INTO Rozklad(Kod,DayOfWeek,Grupa,Vikladach,Predmet,Auditoria,Week) VALUES(@Kod, @DayOfWeek, @Grupa, @Vikladach, @Predmet, @Auditoria, @Week)";
-            comm.Parameters.Add("@Kod", textBox5.Text);
-            comm.Parameters.Add("@DayOfWeek", textBox6.Text);
-            comm.Parameters.Add("@Grupa", comboBox1.SelectedValue);
-            comm.Parameters.Add("@Vikladach", comboBox2.SelectedValue);
-            comm.Parameters.Add("@Predmet", comboBox3.SelectedValue);
-            comm.Parameters.Add("@Auditoria", comboBox4.SelectedValue);
-            comm.Parameters.Add("@Week", textBox7.Text);
-            comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from Rozklad", conn);
-            DataSet DS = new DataSet();
-            mySqlDataAdapter.Fill(DS);
-            dataGridView1.DataSource = DS.Tables[0];
-            conn.Close();
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "INSERT INTO Rozklad(Kod,DayOfWeek,Grupa,Vikladach,Predmet,Auditoria,Week) VALUES(@Kod, @DayOfWeek, @Grupa, @Vikladach, @Predmet, @Auditoria, @Week)";
+                comm.Parameters.Add("@Kod", textBox5.Text);
+                comm.Parameters.Add("@DayOfWeek", textBox6.Text);
+                comm.Parameters.Add("@Grupa", comboBox1.SelectedValue);
+                comm.Parameters.Add("@Vikladach", comboBox2.SelectedValue);
+                comm.Parameters.Add("@Predmet", comboBox3.SelectedValue);
+                comm.Parameters.Add("@Auditoria", comboBox4.SelectedValue);
+                comm.Parameters.Add("@Week", textBox7.Text);
+                comm.ExecuteNonQuery();
+                mySqlDataAdapter = new MySqlDataAdapter("select * from Rozklad", conn);
+                DataSet DS = new DataSet();
+                mySqlDataAdapter.Fill(DS);
+                dataGridView1.DataSource = DS.Tables[0];
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
-            conn.Open();
-            MySqlCommand comm = conn.CreateCommand();
-            comm.CommandText = "DELETE FROM Rozklad WHERE Kod = " + textBox5.Text;
-            comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from Rozklad", conn);
-            DataSet DS = new DataSet();
-            mySqlDataAdapter.Fill(DS);
-            dataGridView1.DataSource = DS.Tables[0];
-            conn.Close();
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "DELETE FROM Rozklad WHERE Kod = " + textBox5.Text;
+                comm.ExecuteNonQuery();
+                mySqlDataAdapter = new MySqlDataAdapter("select * from Rozklad", conn);
+                DataSet DS = new DataSet();
+                mySqlDataAdapter.Fill(DS);
+                dataGridView1.DataSource = DS.Tables[0];
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            try
+            {
             MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
@@ -251,6 +267,11 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -90,26 +90,35 @@ namespace Rozklad
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
-            conn.Open();
-            MySqlCommand comm = conn.CreateCommand();
-            comm.CommandText = "INSERT INTO Groups(Kod,Nazva,Specialnist) VALUES(@Kod, @Nazva, @Specialnist)";
-            comm.Parameters.Add("@Kod", textBox1.Text);
-            comm.Parameters.Add("@Nazva", textBox2.Text);
-            comm.Parameters.Add("@Specialnist", comboBox1.SelectedValue);
-            //MessageBox.Show("Kod= " + comboBox1.SelectedValue);
-            comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from Groups", conn);
-            DataSet DS = new DataSet();
-            mySqlDataAdapter.Fill(DS);
-            dataGridView1.DataSource = DS.Tables[0];
-            conn.Close();
-            
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "INSERT INTO Groups(Kod,Nazva,Specialnist) VALUES(@Kod, @Nazva, @Specialnist)";
+                comm.Parameters.Add("@Kod", textBox1.Text);
+                comm.Parameters.Add("@Nazva", textBox2.Text);
+                comm.Parameters.Add("@Specialnist", comboBox1.SelectedValue);
+                //MessageBox.Show("Kod= " + comboBox1.SelectedValue);
+                comm.ExecuteNonQuery();
+                mySqlDataAdapter = new MySqlDataAdapter("select * from Groups", conn);
+                DataSet DS = new DataSet();
+                mySqlDataAdapter.Fill(DS);
+                dataGridView1.DataSource = DS.Tables[0];
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM Groups WHERE Kod = " + textBox1.Text;
@@ -119,11 +128,18 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE Groups SET Nazva = '" + textBox2.Text + "', Specialnist = '" + comboBox1.SelectedValue + "' WHERE Groups.Kod = '" + textBox1.Text + "'";
@@ -133,6 +149,11 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -81,7 +81,9 @@ namespace Rozklad
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "INSERT INTO Predmeti(Kod,Nazva) VALUES(@Kod, @Nazva)";
@@ -93,11 +95,18 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM Predmeti WHERE Kod = " + textBox1.Text;
@@ -107,11 +116,18 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE Predmeti SET Nazva = '" + textBox2.Text + "' WHERE Predmeti.Kod = '" + textBox1.Text + "'";
@@ -121,6 +137,11 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
