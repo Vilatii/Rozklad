@@ -82,7 +82,10 @@
             // 
             // comboBox1
             // 
+<<<<<<< HEAD
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+=======
+>>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(478, 33);
             this.comboBox1.Name = "comboBox1";
@@ -91,7 +94,10 @@
             // 
             // comboBox2
             // 
+<<<<<<< HEAD
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+=======
+>>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(478, 58);
             this.comboBox2.Name = "comboBox2";

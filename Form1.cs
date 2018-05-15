@@ -211,15 +211,25 @@ namespace Rozklad
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
                 conn.Open();
                 MySqlCommand comm = conn.CreateCommand();
+<<<<<<< HEAD
                 comm.CommandText = "INSERT INTO Rozklad(Kod,DayOfWeek,Para,Grupa,Vikladach,Predmet,Auditoria,Week) VALUES(@Kod, @DayOfWeek, @Para, @Grupa, @Vikladach, @Predmet, @Auditoria, @Week)";
                 comm.Parameters.Add("@Kod", textBox5.Text);
                 comm.Parameters.Add("@DayOfWeek", comboBox6.SelectedItem);
                 comm.Parameters.Add("@Para", comboBox5.SelectedItem);
+=======
+                comm.CommandText = "INSERT INTO Rozklad(Kod,DayOfWeek,Grupa,Vikladach,Predmet,Auditoria,Week) VALUES(@Kod, @DayOfWeek, @Grupa, @Vikladach, @Predmet, @Auditoria, @Week)";
+                comm.Parameters.Add("@Kod", textBox5.Text);
+                comm.Parameters.Add("@DayOfWeek", textBox6.Text);
+>>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
                 comm.Parameters.Add("@Grupa", comboBox1.SelectedValue);
                 comm.Parameters.Add("@Vikladach", comboBox2.SelectedValue);
                 comm.Parameters.Add("@Predmet", comboBox3.SelectedValue);
                 comm.Parameters.Add("@Auditoria", comboBox4.SelectedValue);
+<<<<<<< HEAD
                 comm.Parameters.Add("@Week", comboBox7.SelectedItem);
+=======
+                comm.Parameters.Add("@Week", textBox7.Text);
+>>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
                 comm.ExecuteNonQuery();
                 mySqlDataAdapter = new MySqlDataAdapter("select * from Rozklad", conn);
                 DataSet DS = new DataSet();
