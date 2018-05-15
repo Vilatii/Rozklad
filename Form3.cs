@@ -82,23 +82,32 @@ namespace Rozklad
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
-            conn.Open();
-            MySqlCommand comm = conn.CreateCommand();
-            comm.CommandText = "INSERT INTO Vikladachi(Number,PIB) VALUES(@Number, @PIB)";
-            comm.Parameters.Add("@Number", textBox1.Text);
-            comm.Parameters.Add("@PIB", textBox2.Text);
-            comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from Vikladachi", conn);
-            DataSet DS = new DataSet();
-            mySqlDataAdapter.Fill(DS);
-            dataGridView1.DataSource = DS.Tables[0];
-            conn.Close();
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "INSERT INTO Vikladachi(Number,PIB) VALUES(@Number, @PIB)";
+                comm.Parameters.Add("@Number", textBox1.Text);
+                comm.Parameters.Add("@PIB", textBox2.Text);
+                comm.ExecuteNonQuery();
+                mySqlDataAdapter = new MySqlDataAdapter("select * from Vikladachi", conn);
+                DataSet DS = new DataSet();
+                mySqlDataAdapter.Fill(DS);
+                dataGridView1.DataSource = DS.Tables[0];
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM Vikladachi WHERE Number = " + textBox1.Text;
@@ -108,11 +117,18 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE Vikladachi SET PIB = '" + textBox2.Text + "' WHERE Vikladachi.Number = '" + textBox1.Text + "'";
@@ -122,6 +138,11 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
