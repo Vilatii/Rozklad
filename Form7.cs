@@ -100,10 +100,6 @@ namespace Rozklad
 
         private void button1_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
             try
             {
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
@@ -129,46 +125,13 @@ namespace Rozklad
             {
                 MessageBox.Show(ex.Message);
             }
-<<<<<<< HEAD
-=======
-=======
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
-            conn.Open();
-            MySqlCommand comm = conn.CreateCommand();
-            comm.CommandText = "INSERT INTO NavantazhenyaGroup(Kod,Grupa,Predmet,HourOfLekcia,HourOfLB,HourOfPR,SemestrControl,Semestr) VALUES(@Kod, @Grupa, @Predmet, @HourOfLekcia, @HourOfLB, @HourOfPR, @SemestrControl, @Semestr)";
-            comm.Parameters.Add("@Kod", textBox1.Text);
-            comm.Parameters.Add("@Grupa", comboBox1.SelectedValue);
-            comm.Parameters.Add("@Predmet", comboBox2.SelectedValue);
-            comm.Parameters.Add("@HourOfLekcia", textBox2.Text);
-            comm.Parameters.Add("@HourOfLB", textBox3.Text);
-            comm.Parameters.Add("@HourOfPR", textBox4.Text);
-            comm.Parameters.Add("@SemestrControl", textBox5.Text);
-            comm.Parameters.Add("@Semestr", textBox6.Text);
-            comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaGroup", conn);
-            DataSet DS = new DataSet();
-            mySqlDataAdapter.Fill(DS);
-            dataGridView1.DataSource = DS.Tables[0];
-            conn.Close();
->>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             try
             {
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
-=======
-<<<<<<< HEAD
-            try
-            {
-                MySqlConnection conn = new MySqlConnection(SQL.connStr);
-=======
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
->>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM NavantazhenyaGroup WHERE Kod = " + textBox1.Text;
@@ -178,37 +141,18 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             try
             {
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
-=======
-<<<<<<< HEAD
-            try
-            {
-                MySqlConnection conn = new MySqlConnection(SQL.connStr);
-=======
-            MySqlConnection conn = new MySqlConnection(SQL.connStr);
->>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE NavantazhenyaGroup SET HourOfLekcia = '" + textBox2.Text + "', Grupa = '" + comboBox1.SelectedValue + "', Predmet = '" + comboBox2.SelectedValue + "', HourOfLB = '" + textBox3.Text + "', HourOfPR = '" + textBox4.Text + "', SemestrControl = '" + textBox5.Text + "', Semestr = '" + textBox6.Text + "' WHERE NavantazhenyaGroup.Kod = '" + textBox1.Text + "'";
@@ -218,20 +162,11 @@ namespace Rozklad
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
             conn.Close();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b39c37e61a0ed733585e177e67087753a5675a73
->>>>>>> d9987b4d89360c24a36f19e2d5a8e4fe4b2629ba
         }
     }
 }
