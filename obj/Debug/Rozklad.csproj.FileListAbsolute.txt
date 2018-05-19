@@ -66,3 +66,4 @@ D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad
 D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.csproj.CopyComplete
 D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.exe
 D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.pdb
+D:\Мои документы\ДИПЛОМ\Rozklad_v0.1\Rozklad\obj\Debug\Rozklad.exe.config

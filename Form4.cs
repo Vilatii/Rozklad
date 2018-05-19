@@ -65,7 +65,7 @@ namespace Rozklad
             {
                 if (OpenConnection() == true)
                 {
-                    mySqlDataAdapter = new MySqlDataAdapter("select * from Groups", conn);
+                    mySqlDataAdapter = new MySqlDataAdapter("SELECT Groups.Kod, Groups.Nazva,(SELECT Specialnosti.Nazva FROM Specialnosti WHERE Groups.Specialnist = Specialnosti.Kod) AS `Specialnist` FROM Groups", conn);
                     DataSet DS = new DataSet();
                     mySqlDataAdapter.Fill(DS);
                     dataGridView1.DataSource = DS.Tables[0];
@@ -101,7 +101,7 @@ namespace Rozklad
                 comm.Parameters.Add("@Specialnist", comboBox1.SelectedValue);
                 //MessageBox.Show("Kod= " + comboBox1.SelectedValue);
                 comm.ExecuteNonQuery();
-                mySqlDataAdapter = new MySqlDataAdapter("select * from Groups", conn);
+                mySqlDataAdapter = new MySqlDataAdapter("SELECT Groups.Kod, Groups.Nazva,(SELECT Specialnosti.Nazva FROM Specialnosti WHERE Groups.Specialnist = Specialnosti.Kod) AS `Specialnist` FROM Groups", conn);
                 DataSet DS = new DataSet();
                 mySqlDataAdapter.Fill(DS);
                 dataGridView1.DataSource = DS.Tables[0];
@@ -123,7 +123,7 @@ namespace Rozklad
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM Groups WHERE Kod = " + textBox1.Text;
             comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from Groups", conn);
+            mySqlDataAdapter = new MySqlDataAdapter("SELECT Groups.Kod, Groups.Nazva,(SELECT Specialnosti.Nazva FROM Specialnosti WHERE Groups.Specialnist = Specialnosti.Kod) AS `Specialnist` FROM Groups", conn);
             DataSet DS = new DataSet();
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
@@ -144,7 +144,7 @@ namespace Rozklad
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE Groups SET Nazva = '" + textBox2.Text + "', Specialnist = '" + comboBox1.SelectedValue + "' WHERE Groups.Kod = '" + textBox1.Text + "'";
             comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from Groups", conn);
+            mySqlDataAdapter = new MySqlDataAdapter("SELECT Groups.Kod, Groups.Nazva,(SELECT Specialnosti.Nazva FROM Specialnosti WHERE Groups.Specialnist = Specialnosti.Kod) AS `Specialnist` FROM Groups", conn);
             DataSet DS = new DataSet();
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];

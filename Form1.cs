@@ -262,9 +262,9 @@ namespace Rozklad
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
                 string dw = comboBox6.SelectedItem.ToString();
-                if(dw == "П'ятниця")
+                if (dw.Equals("П'ятниця"))
                 {
-                    dw = "П\'ятниця";
+                    dw = "П\\'ятниця";
                 }
             comm.CommandText = "UPDATE Rozklad SET DayOfWeek = '" + dw + "', Para = '" + comboBox5.SelectedItem + "', Grupa = '" + comboBox1.SelectedValue + "', Vikladach = '" + comboBox2.SelectedValue + "', Predmet = '" + comboBox3.SelectedValue + "', Auditoria = '" + comboBox4.SelectedValue + "', Week = '" + comboBox7.SelectedItem + "' WHERE Rozklad.Kod = '" + textBox5.Text + "'";
             comm.ExecuteNonQuery();
@@ -278,6 +278,79 @@ namespace Rozklad
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void зберегтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string file = "C:\\DataBaseBackup.sql";
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "SQL Dump File (*.sql)|*.sql";
+                sfd.FileName = "DataBaseBackup.sql";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    file = sfd.FileName;
+                }
+                using (MySqlConnection conn = new MySqlConnection(SQL.connStr))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = conn;
+                            conn.Open();
+                            mb.ExportToFile(file);
+                            mySqlDataAdapter = new MySqlDataAdapter("SELECT Rozklad.Kod,Rozklad.DayOfWeek,Rozklad.Para,(SELECT Groups.Nazva FROM Groups WHERE Rozklad.Grupa = Groups.Kod) as `Grupa`, (SELECT Vikladachi.PIB FROM Vikladachi WHERE Rozklad.Vikladach = Vikladachi.Number) as `Vikladach`, (SELECT Predmeti.Nazva FROM Predmeti WHERE Rozklad.Predmet = Predmeti.Kod) as `Predmet`, Rozklad.Auditoria, Rozklad.Week FROM Rozklad", conn);
+                            DataSet DS = new DataSet();
+                            mySqlDataAdapter.Fill(DS);
+                            dataGridView1.DataSource = DS.Tables[0];
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void зберегтиВсеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string file = "C:\\DataBaseBackup.sql";
+                OpenFileDialog sfd = new OpenFileDialog();
+                sfd.Filter = "SQL Dump File (*.sql)|*.sql";
+                sfd.FileName = "DataBaseBackup.sql";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    file = sfd.FileName;
+                }
+                using (MySqlConnection conn = new MySqlConnection(SQL.connStr))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = conn;
+                            conn.Open();
+                            mb.ImportFromFile(file);
+                            mySqlDataAdapter = new MySqlDataAdapter("SELECT Rozklad.Kod,Rozklad.DayOfWeek,Rozklad.Para,(SELECT Groups.Nazva FROM Groups WHERE Rozklad.Grupa = Groups.Kod) as `Grupa`, (SELECT Vikladachi.PIB FROM Vikladachi WHERE Rozklad.Vikladach = Vikladachi.Number) as `Vikladach`, (SELECT Predmeti.Nazva FROM Predmeti WHERE Rozklad.Predmet = Predmeti.Kod) as `Predmet`, Rozklad.Auditoria, Rozklad.Week FROM Rozklad", conn);
+                            DataSet DS = new DataSet();
+                            mySqlDataAdapter.Fill(DS);
+                            dataGridView1.DataSource = DS.Tables[0];
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

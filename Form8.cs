@@ -65,7 +65,7 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
             {
                 if (OpenConnection() == true)
                 {
-                    mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaVikladachiv", conn);
+                    mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaVikladachiv.Kod, NavantazhenyaVikladachiv.Nomer,(SELECT Vikladachi.PIB FROM Vikladachi WHERE NavantazhenyaVikladachiv.Vikladachi = Vikladachi.Number) AS `Vikladach` FROM NavantazhenyaVikladachiv", conn);
                     DataSet DS = new DataSet();
                     mySqlDataAdapter.Fill(DS);
                     dataGridView1.DataSource = DS.Tables[0];
@@ -109,7 +109,7 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
             comm.Parameters.Add("@Nomer", comboBox1.SelectedValue);
             comm.Parameters.Add("@Vikladachi", comboBox2.SelectedValue);
             comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaVikladachiv", conn);
+            mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaVikladachiv.Kod, NavantazhenyaVikladachiv.Nomer,(SELECT Vikladachi.PIB FROM Vikladachi WHERE NavantazhenyaVikladachiv.Vikladachi = Vikladachi.Number) AS `Vikladach` FROM NavantazhenyaVikladachiv", conn);
             DataSet DS = new DataSet();
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
@@ -130,7 +130,7 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM NavantazhenyaVikladachiv WHERE Kod = " + textBox1.Text;
             comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaVikladachiv", conn);
+            mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaVikladachiv.Kod, NavantazhenyaVikladachiv.Nomer,(SELECT Vikladachi.PIB FROM Vikladachi WHERE NavantazhenyaVikladachiv.Vikladachi = Vikladachi.Number) AS `Vikladach` FROM NavantazhenyaVikladachiv", conn);
             DataSet DS = new DataSet();
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
@@ -151,7 +151,7 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE NavantazhenyaVikladachiv SET Nomer = '" + comboBox1.SelectedValue + "', Vikladachi = '" + comboBox2.SelectedValue + "' WHERE NavantazhenyaVikladachiv.Kod = '" + textBox1.Text + "'";
             comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaVikladachiv", conn);
+            mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaVikladachiv.Kod, NavantazhenyaVikladachiv.Nomer,(SELECT Vikladachi.PIB FROM Vikladachi WHERE NavantazhenyaVikladachiv.Vikladachi = Vikladachi.Number) AS `Vikladach` FROM NavantazhenyaVikladachiv", conn);
             DataSet DS = new DataSet();
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];

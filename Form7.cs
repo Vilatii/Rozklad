@@ -65,7 +65,7 @@ namespace Rozklad
             {
                 if (OpenConnection() == true)
                 {
-                    mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaGroup", conn);
+                    mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaGroup.Kod,(SELECT Groups.Nazva FROM Groups WHERE NavantazhenyaGroup.Grupa = Groups.Kod) AS `Grupa`,(SELECT Predmeti.Nazva FROM Predmeti WHERE NavantazhenyaGroup.Predmet = Predmeti.Kod) AS `Predmet`, NavantazhenyaGroup.HourOfLekcia, NavantazhenyaGroup.HourOfLB, NavantazhenyaGroup.HourOfPR, NavantazhenyaGroup.SemestrControl, NavantazhenyaGroup.Semestr FROM NavantazhenyaGroup", conn);
                     DataSet DS = new DataSet();
                     mySqlDataAdapter.Fill(DS);
                     dataGridView1.DataSource = DS.Tables[0];
@@ -115,7 +115,7 @@ namespace Rozklad
                 comm.Parameters.Add("@SemestrControl", textBox5.Text);
                 comm.Parameters.Add("@Semestr", textBox6.Text);
                 comm.ExecuteNonQuery();
-                mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaGroup", conn);
+                mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaGroup.Kod,(SELECT Groups.Nazva FROM Groups WHERE NavantazhenyaGroup.Grupa = Groups.Kod) AS `Grupa`,(SELECT Predmeti.Nazva FROM Predmeti WHERE NavantazhenyaGroup.Predmet = Predmeti.Kod) AS `Predmet`, NavantazhenyaGroup.HourOfLekcia, NavantazhenyaGroup.HourOfLB, NavantazhenyaGroup.HourOfPR, NavantazhenyaGroup.SemestrControl, NavantazhenyaGroup.Semestr FROM NavantazhenyaGroup", conn);
                 DataSet DS = new DataSet();
                 mySqlDataAdapter.Fill(DS);
                 dataGridView1.DataSource = DS.Tables[0];
@@ -136,7 +136,7 @@ namespace Rozklad
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "DELETE FROM NavantazhenyaGroup WHERE Kod = " + textBox1.Text;
             comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaGroup", conn);
+            mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaGroup.Kod,(SELECT Groups.Nazva FROM Groups WHERE NavantazhenyaGroup.Grupa = Groups.Kod) AS `Grupa`,(SELECT Predmeti.Nazva FROM Predmeti WHERE NavantazhenyaGroup.Predmet = Predmeti.Kod) AS `Predmet`, NavantazhenyaGroup.HourOfLekcia, NavantazhenyaGroup.HourOfLB, NavantazhenyaGroup.HourOfPR, NavantazhenyaGroup.SemestrControl, NavantazhenyaGroup.Semestr FROM NavantazhenyaGroup", conn);
             DataSet DS = new DataSet();
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
@@ -157,7 +157,7 @@ namespace Rozklad
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "UPDATE NavantazhenyaGroup SET HourOfLekcia = '" + textBox2.Text + "', Grupa = '" + comboBox1.SelectedValue + "', Predmet = '" + comboBox2.SelectedValue + "', HourOfLB = '" + textBox3.Text + "', HourOfPR = '" + textBox4.Text + "', SemestrControl = '" + textBox5.Text + "', Semestr = '" + textBox6.Text + "' WHERE NavantazhenyaGroup.Kod = '" + textBox1.Text + "'";
             comm.ExecuteNonQuery();
-            mySqlDataAdapter = new MySqlDataAdapter("select * from NavantazhenyaGroup", conn);
+            mySqlDataAdapter = new MySqlDataAdapter("SELECT NavantazhenyaGroup.Kod,(SELECT Groups.Nazva FROM Groups WHERE NavantazhenyaGroup.Grupa = Groups.Kod) AS `Grupa`,(SELECT Predmeti.Nazva FROM Predmeti WHERE NavantazhenyaGroup.Predmet = Predmeti.Kod) AS `Predmet`, NavantazhenyaGroup.HourOfLekcia, NavantazhenyaGroup.HourOfLB, NavantazhenyaGroup.HourOfPR, NavantazhenyaGroup.SemestrControl, NavantazhenyaGroup.Semestr FROM NavantazhenyaGroup", conn);
             DataSet DS = new DataSet();
             mySqlDataAdapter.Fill(DS);
             dataGridView1.DataSource = DS.Tables[0];
