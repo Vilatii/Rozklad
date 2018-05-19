@@ -352,5 +352,12 @@ namespace Rozklad
             }
 
         }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar)) return;
+            else
+                e.Handled = true;
+        }
     }
 }

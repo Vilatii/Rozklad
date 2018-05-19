@@ -200,7 +200,7 @@
             // 
             this.зберегтиToolStripMenuItem.Name = "зберегтиToolStripMenuItem";
             this.зберегтиToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.зберегтиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.зберегтиToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.зберегтиToolStripMenuItem.Text = "Експорт";
             this.зберегтиToolStripMenuItem.Click += new System.EventHandler(this.зберегтиToolStripMenuItem_Click);
             // 
@@ -208,7 +208,7 @@
             // 
             this.зберегтиВсеToolStripMenuItem.Name = "зберегтиВсеToolStripMenuItem";
             this.зберегтиВсеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.зберегтиВсеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.зберегтиВсеToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.зберегтиВсеToolStripMenuItem.Text = "Імпорт";
             this.зберегтиВсеToolStripMenuItem.Click += new System.EventHandler(this.зберегтиВсеToolStripMenuItem_Click);
             // 
@@ -509,6 +509,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 20);
             this.textBox5.TabIndex = 1;
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // dataGridView1
             // 

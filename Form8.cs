@@ -162,5 +162,12 @@ MySqlConnection conn = new MySqlConnection(SQL.connStr);
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar)) return;
+            else
+                e.Handled = true;
+        }
     }
 }

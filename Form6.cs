@@ -143,5 +143,12 @@ namespace Rozklad
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar)) return;
+            else
+                e.Handled = true;
+        }
     }
 }
