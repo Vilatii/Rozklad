@@ -22,6 +22,7 @@ namespace Rozklad
         private string port = "3306"; // Порт для подключения
         private string password; // Пароль для подключения
         public string connStr;
+        public bool connect_state;
         public Form1()
         {
             InitializeComponent();
@@ -64,6 +65,7 @@ namespace Rozklad
                 try
                 {
                     conn.Open();
+                    connect_state = true;
                     return true;
                 }
                 catch (MySqlException ex)
@@ -80,61 +82,62 @@ namespace Rozklad
                             MessageBox.Show(ex.Message);
                             break;
                     }
+                    connect_state = false;
                     return false;
                 }
             }
             try
             {
-                groupBox1.Visible = false;
-                menuStrip1.Visible = true;
                 if (OpenConnection() == true)
                 {
+                    groupBox1.Visible = false;
+                    menuStrip1.Visible = true;
                     mySqlDataAdapter = new MySqlDataAdapter("SELECT Rozklad.Kod,Rozklad.DayOfWeek,Rozklad.Para,(SELECT Groups.Nazva FROM Groups WHERE Rozklad.Grupa = Groups.Kod) as `Grupa`, (SELECT Vikladachi.PIB FROM Vikladachi WHERE Rozklad.Vikladach = Vikladachi.Number) as `Vikladach`, (SELECT Predmeti.Nazva FROM Predmeti WHERE Rozklad.Predmet = Predmeti.Kod) as `Predmet`, Rozklad.Auditoria, Rozklad.Week FROM Rozklad", conn);
                     DataSet DS = new DataSet();
                     mySqlDataAdapter.Fill(DS);
                     dataGridView1.DataSource = DS.Tables[0];
+                    groupBox2.Visible = true;
+                    DataTable GroupTable = new DataTable();
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "Select * from Groups";
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(GroupTable);
+                    comboBox1.DataSource = GroupTable;
+                    comboBox1.ValueMember = "Kod";
+                    comboBox1.DisplayMember = "Nazva";
+
+                    DataTable VikladachTable = new DataTable();
+                    MySqlCommand cmd1 = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "Select * from Vikladachi";
+                    MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1);
+                    adapter.Fill(VikladachTable);
+                    comboBox2.DataSource = VikladachTable;
+                    comboBox2.ValueMember = "Number";
+                    comboBox2.DisplayMember = "PIB";
+
+                    DataTable PredmetTable = new DataTable();
+                    MySqlCommand cmd2 = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "Select * from Predmeti";
+                    MySqlDataAdapter adapter2 = new MySqlDataAdapter(cmd2);
+                    adapter.Fill(PredmetTable);
+                    comboBox3.DataSource = PredmetTable;
+                    comboBox3.ValueMember = "Kod";
+                    comboBox3.DisplayMember = "Nazva";
+
+                    DataTable AuditoriiTable = new DataTable();
+                    MySqlCommand cmd3 = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "Select * from Auditorii";
+                    MySqlDataAdapter adapter3 = new MySqlDataAdapter(cmd3);
+                    adapter.Fill(AuditoriiTable);
+                    comboBox4.DataSource = AuditoriiTable;
+                    comboBox4.ValueMember = "Kod";
+                    comboBox4.DisplayMember = "Kod";
                     CloseConnection();
                 }
-                groupBox2.Visible = true;
-                DataTable GroupTable = new DataTable();
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "Select * from Groups";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                adapter.Fill(GroupTable);
-                comboBox1.DataSource = GroupTable;
-                comboBox1.ValueMember = "Kod";
-                comboBox1.DisplayMember = "Nazva";
-
-                DataTable VikladachTable = new DataTable();
-                MySqlCommand cmd1 = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "Select * from Vikladachi";
-                MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1);
-                adapter.Fill(VikladachTable);
-                comboBox2.DataSource = VikladachTable;
-                comboBox2.ValueMember = "Number";
-                comboBox2.DisplayMember = "PIB";
-
-                DataTable PredmetTable = new DataTable();
-                MySqlCommand cmd2 = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "Select * from Predmeti";
-                MySqlDataAdapter adapter2 = new MySqlDataAdapter(cmd2);
-                adapter.Fill(PredmetTable);
-                comboBox3.DataSource = PredmetTable;
-                comboBox3.ValueMember = "Kod";
-                comboBox3.DisplayMember = "Nazva";
-
-                DataTable AuditoriiTable = new DataTable();
-                MySqlCommand cmd3 = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "Select * from Auditorii";
-                MySqlDataAdapter adapter3 = new MySqlDataAdapter(cmd3);
-                adapter.Fill(AuditoriiTable);
-                comboBox4.DataSource = AuditoriiTable;
-                comboBox4.ValueMember = "Kod";
-                comboBox4.DisplayMember = "Kod";
             }
             catch (Exception ex)
             {
@@ -211,21 +214,39 @@ namespace Rozklad
                 MySqlConnection conn = new MySqlConnection(SQL.connStr);
                 conn.Open();
                 MySqlCommand comm = conn.CreateCommand();
-                comm.CommandText = "INSERT INTO Rozklad(Kod,DayOfWeek,Para,Grupa,Vikladach,Predmet,Auditoria,Week) VALUES(@Kod, @DayOfWeek, @Para, @Grupa, @Vikladach, @Predmet, @Auditoria, @Week)";
-                comm.Parameters.Add("@Kod", textBox5.Text);
-                comm.Parameters.Add("@DayOfWeek", comboBox6.SelectedItem);
-                comm.Parameters.Add("@Para", comboBox5.SelectedItem);
-                comm.Parameters.Add("@Grupa", comboBox1.SelectedValue);
-                comm.Parameters.Add("@Vikladach", comboBox2.SelectedValue);
-                comm.Parameters.Add("@Predmet", comboBox3.SelectedValue);
-                comm.Parameters.Add("@Auditoria", comboBox4.SelectedValue);
-                comm.Parameters.Add("@Week", comboBox7.SelectedItem);
-                comm.ExecuteNonQuery();
-                mySqlDataAdapter = new MySqlDataAdapter("SELECT Rozklad.Kod,Rozklad.DayOfWeek,Rozklad.Para,(SELECT Groups.Nazva FROM Groups WHERE Rozklad.Grupa = Groups.Kod) as `Grupa`, (SELECT Vikladachi.PIB FROM Vikladachi WHERE Rozklad.Vikladach = Vikladachi.Number) as `Vikladach`, (SELECT Predmeti.Nazva FROM Predmeti WHERE Rozklad.Predmet = Predmeti.Kod) as `Predmet`, Rozklad.Auditoria, Rozklad.Week FROM Rozklad", conn);
-                DataSet DS = new DataSet();
-                mySqlDataAdapter.Fill(DS);
-                dataGridView1.DataSource = DS.Tables[0];
-                conn.Close();
+                string dw = comboBox6.SelectedItem.ToString();
+                if (dw.Equals("П'ятниця"))
+                {
+                    dw = "П\\'ятниця";
+                }
+                comm.CommandText = "SELECT COUNT(*) FROM Rozklad WHERE Rozklad.DayOfWeek='" + dw + "' AND Rozklad.Para=" + comboBox5.SelectedItem + " AND Rozklad.Week=" + comboBox7.SelectedItem + " AND Rozklad.Vikladach=" + comboBox2.SelectedValue + ";";
+                int perevirka_vikladach = Convert.ToInt32(comm.ExecuteScalar());
+                comm.CommandText = "SELECT COUNT(*) FROM Rozklad WHERE Rozklad.DayOfWeek='" + dw + "' AND Rozklad.Para=" + comboBox5.SelectedItem + " AND Rozklad.Week=" + comboBox7.SelectedItem + " AND Rozklad.Auditoria=" + comboBox4.SelectedValue + ";";
+                int perevirka_auditoria = Convert.ToInt32(comm.ExecuteScalar());
+                comm.CommandText = "SELECT COUNT(*) FROM Rozklad WHERE Rozklad.DayOfWeek='" + dw + "' AND Rozklad.Para=" + comboBox5.SelectedItem + " AND Rozklad.Week=" + comboBox7.SelectedItem + " AND Rozklad.Grupa=" + comboBox1.SelectedValue + ";";
+                int perevirka_grupa = Convert.ToInt32(comm.ExecuteScalar());
+                if (perevirka_vikladach <= 0 && perevirka_auditoria <= 0 && perevirka_grupa <= 0) {
+                    comm.CommandText = "INSERT INTO Rozklad(Kod,DayOfWeek,Para,Grupa,Vikladach,Predmet,Auditoria,Week) VALUES(@Kod, @DayOfWeek, @Para, @Grupa, @Vikladach, @Predmet, @Auditoria, @Week)";
+                    comm.Parameters.Add("@Kod", textBox5.Text);
+                    comm.Parameters.Add("@DayOfWeek", comboBox6.SelectedItem);
+                    comm.Parameters.Add("@Para", comboBox5.SelectedItem);
+                    comm.Parameters.Add("@Grupa", comboBox1.SelectedValue);
+                    comm.Parameters.Add("@Vikladach", comboBox2.SelectedValue);
+                    comm.Parameters.Add("@Predmet", comboBox3.SelectedValue);
+                    comm.Parameters.Add("@Auditoria", comboBox4.SelectedValue);
+                    comm.Parameters.Add("@Week", comboBox7.SelectedItem);
+                    comm.ExecuteNonQuery();
+                    mySqlDataAdapter = new MySqlDataAdapter("SELECT Rozklad.Kod,Rozklad.DayOfWeek,Rozklad.Para,(SELECT Groups.Nazva FROM Groups WHERE Rozklad.Grupa = Groups.Kod) as `Grupa`, (SELECT Vikladachi.PIB FROM Vikladachi WHERE Rozklad.Vikladach = Vikladachi.Number) as `Vikladach`, (SELECT Predmeti.Nazva FROM Predmeti WHERE Rozklad.Predmet = Predmeti.Kod) as `Predmet`, Rozklad.Auditoria, Rozklad.Week FROM Rozklad", conn);
+                    DataSet DS = new DataSet();
+                    mySqlDataAdapter.Fill(DS);
+                    dataGridView1.DataSource = DS.Tables[0];
+                    conn.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Викладач, аудиторія або група вже зайняті! Перевірте правильність вводу даних!");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -358,6 +379,53 @@ namespace Rozklad
             if (Char.IsDigit(e.KeyChar)) return;
             else
                 e.Handled = true;
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+          if (connect_state == true)
+            {
+                MySqlConnection conn = new MySqlConnection(SQL.connStr);
+                DataTable GroupTable = new DataTable();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Select * from Groups";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                adapter.Fill(GroupTable);
+                comboBox1.DataSource = GroupTable;
+                comboBox1.ValueMember = "Kod";
+                comboBox1.DisplayMember = "Nazva";
+
+                DataTable VikladachTable = new DataTable();
+                MySqlCommand cmd1 = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Select * from Vikladachi";
+                MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1);
+                adapter.Fill(VikladachTable);
+                comboBox2.DataSource = VikladachTable;
+                comboBox2.ValueMember = "Number";
+                comboBox2.DisplayMember = "PIB";
+
+                DataTable PredmetTable = new DataTable();
+                MySqlCommand cmd2 = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Select * from Predmeti";
+                MySqlDataAdapter adapter2 = new MySqlDataAdapter(cmd2);
+                adapter.Fill(PredmetTable);
+                comboBox3.DataSource = PredmetTable;
+                comboBox3.ValueMember = "Kod";
+                comboBox3.DisplayMember = "Nazva";
+
+                DataTable AuditoriiTable = new DataTable();
+                MySqlCommand cmd3 = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Select * from Auditorii";
+                MySqlDataAdapter adapter3 = new MySqlDataAdapter(cmd3);
+                adapter.Fill(AuditoriiTable);
+                comboBox4.DataSource = AuditoriiTable;
+                comboBox4.ValueMember = "Kod";
+                comboBox4.DisplayMember = "Kod";
+            } 
         }
     }
 }

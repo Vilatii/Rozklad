@@ -152,5 +152,10 @@ namespace Rozklad
             else
                 e.Handled = true;
         }
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
     }
 }
