@@ -85,6 +85,7 @@ namespace Rozklad
         {
            try
             {
+            
             MySqlConnection conn = new MySqlConnection(SQL.connStr);
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();

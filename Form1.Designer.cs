@@ -288,6 +288,7 @@
             this.закритиToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.закритиToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.закритиToolStripMenuItem.Text = "Закрити";
+            this.закритиToolStripMenuItem.Click += new System.EventHandler(this.закритиToolStripMenuItem_Click);
             // 
             // dataSet1
             // 
